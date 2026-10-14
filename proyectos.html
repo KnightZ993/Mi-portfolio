@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101010">
+  <meta name="description" content="Proyectos de Adrián Hernández, desarrollador web y de software.">
+  <title>Proyectos — Adrián Hernández</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <script src="site.js" defer></script>
+  <script src="projects.js" defer></script>
+</head>
+<body data-page="proyectos">
+  <header class="topbar">
+    <a class="monogram" href="index.html" aria-label="Adrián Hernández, inicio">AH</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu"><span class="menu-mark" aria-hidden="true"><i></i><i></i></span><span class="menu-toggle-label">Menú</span></button>
+  </header>
+  <nav class="menu-panel" id="main-menu" aria-label="Navegación principal" hidden>
+    <div class="menu-main">
+      <p class="menu-heading">Adrián Hernández</p>
+      <div class="menu-links">
+        <a href="index.html">Inicio</a><a href="perfil.html">Perfil</a><a href="tecnologias.html">Tecnologías</a><a href="proceso.html">Proceso</a><a href="proyectos.html">Proyectos</a><a href="https://github.com/KnightZ993" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </div>
+    </div>
+  </nav>
+  <main class="page-main">
+    <header class="page-heading">
+      <p class="section-label">04 — Trabajo seleccionado</p>
+      <h1>Proyectos.</h1>
+      <p>Una selección de trabajos y experimentos de desarrollo. Cada proyecto puede enlazar a su demo y a su código fuente.</p>
+    </header>
+    <section aria-label="Lista de proyectos">
+      <p class="empty-state" id="empty-state" hidden>Aún no hay proyectos publicados. Añade los tuyos en el array <strong>projects</strong> de <strong>projects.js</strong>.</p>
+      <div class="project-grid" id="project-grid"></div>
+    </section>
+  </main>
+  <footer><span>© 2026 Adrián Hernández</span><span>Desarrollo web · Software · DAM</span><a href="https://github.com/KnightZ993" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="index.html">Inicio ↑</a></footer>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111210">
+  <meta name="description" content="Portfolio de Adrián Hernández, estudiante de DAM y desarrollador web y de software.">
+  <title>Adrián Hernández — Desarrollo web y software</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #101010;
+      --surface: #181818;
+      --paper: #f0f0ec;
+      --muted: #a5a5a1;
+      --line: rgba(240, 240, 236, .17);
+      --acid: #f0f0ec;
+      --rust: #92928e;
+      --mono: "IBM Plex Mono", monospace;
+      --display: "Barlow Condensed", sans-serif;
+      --body: "Manrope", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      background-image: repeating-linear-gradient(0deg, rgba(255, 255, 255, .012) 0 1px, transparent 1px 5px);
+      background-attachment: fixed;
+      color: var(--paper);
+      font-family: var(--body);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    ::selection { color: var(--ink); background: var(--acid); }
+
+    .topbar {
+      position: absolute;
+      z-index: 5;
+      top: 0;
+      left: 0;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 6.2vw;
+      border-bottom: 1px solid rgba(240, 240, 236, .2);
+    }
+    .monogram {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border: 1px solid var(--acid);
+      color: var(--acid);
+      font: 600 12px var(--mono);
+      text-decoration: none;
+    }
+    .menu-toggle {
+      display: inline-flex;
+      min-width: 104px;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      border: 1px solid rgba(240, 240, 236, .46);
+      background: rgba(16, 16, 16, .55);
+      color: var(--paper);
+      cursor: pointer;
+      font: 500 10px var(--mono);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      transition: background .2s ease, border-color .2s ease, color .2s ease;
+    }
+    .menu-toggle:hover, .menu-toggle:focus-visible { border-color: var(--paper); background: var(--paper); color: var(--ink); }
+    .menu-mark { display: grid; gap: 4px; width: 15px; }
+    .menu-mark i { display: block; width: 15px; height: 1px; background: currentColor; transition: transform .2s ease; }
+    .menu-toggle[aria-expanded="true"] .menu-mark i:first-child { transform: translateY(2.5px) rotate(45deg); }
+    .menu-toggle[aria-expanded="true"] .menu-mark i:last-child { transform: translateY(-2.5px) rotate(-45deg); }
+    .menu-panel {
+      position: fixed;
+      z-index: 4;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 22vh 24px 40px;
+      background: linear-gradient(90deg, rgba(8, 8, 8, .97), rgba(8, 8, 8, .87)),
+        url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2200&q=85") center / cover;
+      animation: menu-arrive .22s ease-out both;
+    }
+    .menu-panel[hidden] { display: none; }
+    .menu-main { width: min(360px, 100%); }
+    .menu-heading {
+      position: relative;
+      z-index: 0;
+      width: max-content;
+      max-width: none;
+      margin: 0 auto 150px;
+      padding: 0 10px;
+      color: var(--paper);
+      font: 500 34px/1 var(--display);
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .menu-heading::after {
+      position: absolute;
+      z-index: -1;
+      top: 52%;
+      right: -45vw;
+      left: -45vw;
+      height: 1px;
+      background: rgba(240, 240, 236, .36);
+      content: "";
+    }
+    .menu-links { display: grid; }
+    .menu-links a {
+      display: flex;
+      min-height: 31px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #e2e2de;
+      font: 500 14px/1.4 var(--body);
+      text-decoration: none;
+      transition: color .18s ease;
+    }
+    .menu-links a span { color: inherit; font: inherit; }
+    .menu-links a:first-child, .menu-links a:hover, .menu-links a:focus-visible { color: #b32932; }
+    .menu-links a:focus-visible { outline: none; text-shadow: 0 0 8px rgba(179, 41, 50, .7); }
+
+    .hero {
+      position: relative;
+      display: flex;
+      min-height: min(820px, 100svh);
+      align-items: center;
+      overflow: hidden;
+      isolation: isolate;
+      padding: 150px 12vw 100px;
+      background: #171a18;
+    }
+    .hero::before {
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(13, 15, 14, .96) 0%, rgba(13, 15, 14, .84) 45%, rgba(13, 15, 14, .42) 100%),
+        linear-gradient(0deg, rgba(13, 15, 14, .6), transparent 55%),
+        url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2200&q=85") center 48% / cover;
+      content: "";
+      filter: saturate(.48);
+      transform: scale(1.025);
+      animation: scene-arrive 1.2s ease-out both, scene-breathe 24s 1.2s ease-in-out infinite alternate;
+    }
+    .hero::after {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(0, 0, 0, .12) 4px),
+        linear-gradient(90deg, transparent 49.95%, rgba(240, 240, 236, .08) 50%, transparent 50.05%);
+      content: "";
+      pointer-events: none;
+      animation: scan-flicker 9s ease-in-out infinite alternate;
+    }
+    .hero-content { width: min(780px, 100%); animation: rise-in .8s .12s both; }
+    .eyebrow, .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--acid);
+      font: 500 10px var(--mono);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before, .section-label::before {
+      width: 26px;
+      height: 1px;
+      background: currentColor;
+      content: "";
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 800px;
+      margin: 25px 0 20px;
+      font: 700 clamp(76px, 12.5vw, 168px)/1.02 var(--display);
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 span { display: block; margin-top: .06em; color: var(--acid); }
+    .hero-role {
+      margin: 30px 0 0;
+      color: #e0e0d7;
+      font-size: clamp(15px, 1.8vw, 19px);
+      line-height: 1.6;
+    }
+    .signal-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--rust); box-shadow: 0 0 12px rgba(146, 146, 142, .7); animation: signal-pulse 2s ease-in-out infinite; }
+    .hero-role strong { color: var(--paper); font-weight: 600; }
+    .hero-bottom {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 42px;
+    }
+    .action-link {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      gap: 24px;
+      padding: 0 18px;
+      background: var(--acid);
+      color: var(--ink);
+      font: 600 10px var(--mono);
+      letter-spacing: .06em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .action-link:hover { transform: translateY(-2px); background: var(--rust); color: var(--paper); }
+    .action-link span { font-size: 16px; }
+    .hero-index { color: #d0d0c8; font: 10px var(--mono); }
+    .hero-index span { color: var(--rust); }
+    .side-note {
+      position: absolute;
+      right: 6.2vw;
+      bottom: 48px;
+      color: rgba(232, 232, 223, .65);
+      font: 9px var(--mono);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 8vw;
+      padding: 120px 12vw 128px;
+      border-bottom: 1px solid var(--line);
+    }
+    .intro h2, .section-heading {
+      margin: 22px 0 0;
+      font: 600 clamp(42px, 6vw, 72px)/.9 var(--display);
+      text-transform: uppercase;
+    }
+    .intro-copy { max-width: 670px; padding-top: 6px; }
+    .intro-copy p { color: #c5c6bd; font-size: 15px; line-height: 1.9; }
+    .intro-copy p + p { margin-top: 18px; }
+    .inline-accent { color: var(--acid); }
+
+    .skills {
+      padding: 112px 12vw 124px;
+      background: var(--surface);
+    }
+    .skills-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 54px;
+    }
+    .skills-header .section-heading { max-width: 480px; }
+    .skills-note { max-width: 250px; margin: 0 0 4px; color: var(--muted); font: 10px/1.8 var(--mono); }
+    .skill-list { border-top: 1px solid var(--line); }
+    .skill-row {
+      display: grid;
+      grid-template-columns: 70px minmax(180px, .7fr) 1.3fr;
+      gap: 24px;
+      align-items: center;
+      padding: 27px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .skill-number { color: var(--rust); font: 11px var(--mono); }
+    .skill-row h3 { margin: 0; font: 600 27px var(--display); text-transform: uppercase; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 10px;
+      border: 1px solid rgba(232, 232, 223, .22);
+      color: #d2d3cb;
+      font: 10px var(--mono);
+      transition: color .2s ease, border-color .2s ease, background .2s ease, transform .2s ease;
+    }
+    .tag:hover { transform: translateY(-3px); border-color: rgba(255, 255, 255, .65); background: rgba(255, 255, 255, .08); color: var(--paper); }
+
+    .focus {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+    .focus-intro { padding: 106px 8vw 108px 12vw; }
+    .focus-intro .section-heading { max-width: 480px; }
+    .focus-items { display: grid; grid-template-rows: repeat(3, 1fr); border-left: 1px solid var(--line); }
+    .focus-item { display: grid; grid-template-columns: 46px 1fr; gap: 18px; align-content: center; padding: 26px 8vw 26px 42px; border-bottom: 1px solid var(--line); }
+    .focus-item:last-child { border-bottom: 0; }
+    .focus-item > span { color: var(--rust); font: 10px var(--mono); padding-top: 5px; }
+    .focus-item h3 { margin: 0 0 7px; font: 600 25px var(--display); text-transform: uppercase; }
+    .focus-item p { max-width: 400px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 25px 6.2vw;
+      color: var(--muted);
+      font: 9px var(--mono);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    footer a { color: var(--acid); text-decoration: none; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes rise-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes menu-arrive { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scene-arrive { from { opacity: .45; transform: scale(1.06); } to { opacity: 1; transform: scale(1.025); } }
+    @keyframes scene-breathe { from { transform: scale(1.025); } to { transform: scale(1.07); } }
+    @keyframes scan-flicker { from { opacity: .55; } to { opacity: .9; } }
+    @keyframes signal-pulse { 0%, 100% { opacity: .5; box-shadow: 0 0 5px rgba(146, 146, 142, .35); } 50% { opacity: 1; box-shadow: 0 0 13px rgba(146, 146, 142, .85); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 760px) {
+      .topbar { padding: 18px 6vw; }
+      .hero { min-height: 740px; min-height: 100svh; padding: 142px 8vw 100px; }
+      .hero::before { background-position: 58% center; }
+      h1 { font-size: clamp(76px, 16vw, 120px); }
+      .side-note { right: 5vw; bottom: 26px; }
+      .intro { grid-template-columns: 1fr; gap: 35px; padding: 82px 8vw 88px; }
+      .skills { padding: 84px 8vw 90px; }
+      .skills-header { align-items: start; flex-direction: column; margin-bottom: 36px; }
+      .skills-note { max-width: 360px; }
+      .skill-row { grid-template-columns: 36px 1fr; gap: 10px 14px; padding: 22px 0; }
+      .skill-row h3 { font-size: 24px; }
+      .tags { grid-column: 2; }
+      .focus { grid-template-columns: 1fr; }
+      .focus-intro { padding: 80px 8vw 42px; }
+      .focus-items { border-left: 0; }
+      .focus-item { padding: 25px 8vw; border-top: 1px solid var(--line); }
+      footer { align-items: flex-start; flex-direction: column; padding: 23px 8vw; }
+    }
+    @media (max-width: 420px) {
+      .menu-panel { gap: 20px; padding: 22vh 8vw 42px; }
+      .hero-bottom { align-items: flex-start; flex-direction: column; gap: 18px; }
+      .hero { padding-left: 7vw; }
+      h1 { font-size: 19vw; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="monogram" href="index.html" aria-label="Adrián Hernández, inicio">AH</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu">
+      <span class="menu-mark" aria-hidden="true"><i></i><i></i></span>
+      <span class="menu-toggle-label">Menú</span>
+    </button>
+  </header>
+
+  <nav class="menu-panel" id="main-menu" aria-label="Navegación principal" hidden>
+    <div class="menu-main">
+      <p class="menu-heading">Adrián Hernández</p>
+      <div class="menu-links">
+        <a href="index.html">Inicio</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="tecnologias.html">Tecnologías</a>
+        <a href="proceso.html">Proceso</a>
+        <a href="proyectos.html">Proyectos</a>
+        <a href="https://github.com/KnightZ993" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <p class="eyebrow"><span class="signal-dot" aria-hidden="true"></span>Portfolio personal <span aria-hidden="true">/</span> 2026</p>
+        <h1 id="hero-title">Adrián <span>Hernández</span></h1>
+        <p class="hero-role"><strong>Desarrollador web y de software</strong><br>Estudiante de Desarrollo de Aplicaciones Multiplataforma</p>
+        <div class="hero-bottom">
+          <a class="action-link" href="proyectos.html">Ver proyectos <span aria-hidden="true">↘</span></a>
+          <span class="hero-index"><span>01</span> / 05 — Portfolio</span>
+        </div>
+      </div>
+      <span class="side-note">Construyendo en código — AH</span>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>© 2026 Adrián Hernández</span>
+    <span>Desarrollo web · Software · DAM</span>
+    <a href="https://github.com/KnightZ993" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    <a href="index.html">Inicio ↑</a>
+  </footer>
+
+  <script src="site.js" defer></script>
+</body>
+</html>
