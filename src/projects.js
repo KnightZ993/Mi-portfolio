@@ -1,19 +1,12 @@
 // Añade un objeto por proyecto y completa demoUrl y repoUrl con sus enlaces.
 const projects = [
     {
-      title: "Ejemplo1"
-      description: "Ejemplo de descripcion"
-      technologies: ["React", "Node.js", "Python"]
+      title: "Mi portfolio",
+      description: "Codigo disponible en GitHub",
+      technologies: ["React", "Node.js"],
       demoUrl: "#",
-      repoUrl: "https://github.com/KnightZ993?tab=repositories"
+      repoUrl: "https://github.com/KnightZ993/Mi-portfolio"
     }
-  // {
-  //   title: "Nombre del proyecto",
-  //   description: "Qué hace el proyecto y qué parte desarrollaste.",
-  //   technologies: ["React", "Node.js"],
-  //   demoUrl: "https://enlace-a-la-demo",
-  //   repoUrl: "https://github.com/usuario/repositorio"
-  // }
 ];
 
 const projectsContainer = document.querySelector("#project-grid");
