@@ -1,5 +1,10 @@
 // Añade un objeto por proyecto y completa demoUrl y repoUrl con sus enlaces.
 const projects = [
+    {
+      title: "Ejemplo1"
+      description: "Ejemplo de descripcion"
+      technologies: ["React", "Node.js", "Python"]
+    }
   // {
   //   title: "Nombre del proyecto",
   //   description: "Qué hace el proyecto y qué parte desarrollaste.",
