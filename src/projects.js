@@ -4,6 +4,8 @@ const projects = [
       title: "Ejemplo1"
       description: "Ejemplo de descripcion"
       technologies: ["React", "Node.js", "Python"]
+      demoUrl: "#",
+      repoUrl: "https://github.com/KnightZ993?tab=repositories"
     }
   // {
   //   title: "Nombre del proyecto",
