@@ -4,7 +4,7 @@ const projects = [
       title: "Mi portfolio",
       description: "Codigo disponible en GitHub",
       technologies: ["React", "Node.js"],
-      demoUrl: "#",
+      demoUrl: "https://adrian-dev-one.vercel.app",
       repoUrl: "https://github.com/KnightZ993/Mi-portfolio"
     }
 ];
