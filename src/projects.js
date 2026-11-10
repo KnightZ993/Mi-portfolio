@@ -2,8 +2,8 @@
 const projects = [
     {
       title: "Mi portfolio",
-      description: "Codigo disponible en GitHub",
-      technologies: ["React", "Node.js"],
+      description: "Código disponible en GitHub",
+      technologies: ["HTML", "CSS", "JavaScript"],
       demoUrl: "https://dev-adrian.vercel.app",
       repoUrl: "https://github.com/KnightZ993/Mi-portfolio",
       previewImage: "3-portfolio-preview.webp",
